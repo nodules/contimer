@@ -1,0 +1,31 @@
+{
+    "requireCurlyBraces": ["if", "else", "for", "while", "do"],
+    "requireSpaceAfterKeywords": ["if", "else", "for", "while", "do", "switch", "return"],
+    "disallowLeftStickedOperators": [
+        "?", "+", "-", "/", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="
+    ],
+    "disallowRightStickedOperators": [
+        "!", "?", "+", "/", "*", ":", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="
+    ],
+    "requireLeftStickedOperators": [","],
+    "disallowKeywords": ["with"],
+    "disallowMultipleLineBreaks": true,
+    "requireSpacesInsideObjectBrackets": "all",
+    "disallowKeywordsOnNewLine": ["else"],
+    "validateJSDoc": {
+        "checkParamNames": true,
+        "requireParamTypes": true
+    },
+    "requireSpacesInFunctionExpression": {
+        "beforeOpeningCurlyBrace": true
+    },
+    "disallowSpacesInFunctionExpression": {
+        "beforeOpeningRoundBrace": true
+    },
+    "disallowImplicitTypeConversion": ["string"],
+    "requireLineFeedAtFileEnd": true,
+    "excludeFiles": [
+        ".git",
+        ".npm*"
+    ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "contimer",
+  "version": "1.0.0",
+  "description": "Routines to measure time in the context of an object.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jshint --config ./.jshintrc ./*.js ./test && jscs ./*.js ./test && mocha -s 1 -R spec ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nodules/contimer.git"
+  },
+  "keywords": [
+    "timer",
+    "debug"
+  ],
+  "author": "Phillip Kovalev <twilightfeel@gmail.com>",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/nodules/contimer/raw/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/nodules/contimer/issues"
+  },
+  "homepage": "https://github.com/nodules/contimer",
+  "devDependencies": {
+    "jscs": "^1.4.3",
+    "jshint": "^2.5.0",
+    "mocha": "^1.18.2"
+  }
+}
