@@ -2,7 +2,8 @@
  * Property name for timers storage in the context objects.
  * @type {string}
  */
-var _TIMERS_PROP = '__sw_timers';
+var _TIMERS_PROP = '__sw_timers',
+    _stopCallback = null;
 
 /**
  * @param {Number[]} hrtime result of process.hrtime()
@@ -26,13 +27,19 @@ function stop(ctx, id) {
 
     if (typeof timers === 'object' && timers !== null &&
         Object.prototype.hasOwnProperty.call(timers, id) && timers[id] !== null) {
-        result = process.hrtime(timers[id]);
+        result = _hrtime2ms(process.hrtime(timers[id]));
 
         timers[id] = null;
 
+        if (typeof _stopCallback === 'function') {
+            setImmediate(function() {
+                _stopCallback(id, result);
+            });
+        }
+
         return {
             id: id,
-            time: _hrtime2ms(result)
+            time: result
         };
     } else {
         return null;
@@ -66,6 +73,11 @@ function start(ctx, id) {
 }
 
 module.exports = {
-    start : start,
-    stop : stop
+    start: start,
+    stop: stop,
+    hook: function(callback) {
+        _stopCallback = callback;
+
+        return this;
+    }
 };

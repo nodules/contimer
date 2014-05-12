@@ -62,3 +62,24 @@ describe('stop()', function() {
         assert.strictEqual(time.stop({}, TIMER_NAME), null);
     });
 });
+
+describe('hook()', function() {
+    it('should setup the callback for the stop()', function(done) {
+        var delayed = false;
+
+        time.hook(function(id, time) {
+            assert(delayed);
+            assert.strictEqual(id, TIMER_NAME);
+            assert(time >= 0);
+
+            done();
+        });
+
+        time.start({}, TIMER_NAME)();
+        delayed = true;
+    });
+
+    it('should return the module object', function() {
+        assert.strictEqual(time.hook(function() {}), time);
+    });
+});
