@@ -61,6 +61,21 @@ describe('stop()', function() {
         assert.strictEqual(time.stop(ctx, TIMER_NAME), null);
         assert.strictEqual(time.stop({}, TIMER_NAME), null);
     });
+
+    it('should not execute callback if 3rd argument is `true`', function(done) {
+        var marker = true,
+            ctx = {};
+
+        time.hook(function() { marker = false; });
+        time.start(ctx, TIMER_NAME);
+        time.stop(ctx, TIMER_NAME, true);
+        time.start(ctx, TIMER_NAME)(true);
+
+        setTimeout(function() {
+            assert(marker);
+            done();
+        }, 5);
+    });
 });
 
 describe('hook()', function() {

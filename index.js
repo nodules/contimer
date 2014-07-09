@@ -21,7 +21,7 @@ function _hrtime2ms(hrtime) {
  *      null if timer assigned which associated with `id` isn't exists.
  * @public
  */
-function stop(ctx, id) {
+function stop(ctx, id, preventCallback) {
     var result,
         timers = ctx[_TIMERS_PROP];
 
@@ -31,7 +31,7 @@ function stop(ctx, id) {
 
         timers[id] = null;
 
-        if (typeof _stopCallback === 'function') {
+        if (preventCallback !== true && typeof _stopCallback === 'function') {
             setImmediate(function() {
                 _stopCallback(id, result);
             });
@@ -63,8 +63,8 @@ function start(ctx, id) {
         });
     }
 
-    var stopFn = function() {
-            return stop(ctx, id);
+    var stopFn = function(preventCallback) {
+            return stop(ctx, id, preventCallback);
         };
 
     ctx[_TIMERS_PROP][id] = process.hrtime();
